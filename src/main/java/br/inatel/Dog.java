@@ -2,9 +2,9 @@ package br.inatel;
 
 public class Dog extends Pet {
 
-    public static int Pet_idPet;
+    public static int coleiraPet;
 
-    public Dog(String especie, String nome, int idade) {
-        super(especie, nome, idade);
+    public Dog(int coleiraPet, String especie, String nome, int idade) {
+        super(coleiraPet, especie, nome, idade);
     }
 }

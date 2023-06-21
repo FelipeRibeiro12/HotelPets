@@ -16,12 +16,29 @@ class Software {
 
     public ArrayList<Tutor> showTutors() {
         for (Tutor list : tutors) {
-            System.out.println("Tutor: " + list.getNome() + ", Cpf: " + list.getCpf());
+            //System.out.println("Tutor: " + list.getNome() + ", Cpf: " + list.getCpf());
             ArrayList<Pet> pets = list.getPets();
 
-            System.out.println("Pets: ");
+            System.out.println("Pets de " + list.getNome() + " (" + list.getCpf() + "): ");
             for (Pet listpets : pets) {
-                System.out.println("Especie: " + listpets.getEspecie() + ", Nome: " + listpets.getNome() + ", " + listpets.getIdade() + " ano(s)");
+                System.out.println("Coleira: " + listpets.getColeira() + ", Especie: " + listpets.getEspecie() + ", Nome: " + listpets.getNome() + ", " + listpets.getIdade() + " ano(s)");
+            }
+        }
+        return tutors;
+    }
+
+    public ArrayList<Tutor> showPets(String pesquisa) {
+
+        for (Tutor list : tutors) {
+
+            String cpf = list.getCpf();
+
+            if (cpf.equals(pesquisa)) {
+                ArrayList<Pet> pets = list.getPets();
+                System.out.println("Pets de " + list.getNome() + " (" + list.getCpf() + "): ");
+                for (Pet listpets : pets) {
+                    System.out.println("Coleira: " + listpets.getColeira() + ", Especie: " + listpets.getEspecie() + ", Nome: " + listpets.getNome() + ", " + listpets.getIdade() + " ano(s)");
+                }
             }
         }
         return tutors;

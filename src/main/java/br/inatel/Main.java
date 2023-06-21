@@ -23,9 +23,7 @@ public class Main {
             // Opções do menu
             System.out.println("--MENU--");
             System.out.println("1- Adicionar Tutor e Pets");
-            System.out.println("2- Listar Cadastrados");
-            System.out.println("1- Adicionar tutor e pets");
-            System.out.println("2- Listar cadastrados");
+            System.out.println("2- Listar Pets de um Tutor");
             System.out.println("3- Sair");
             System.out.println("Entre com a sua opção: ");
 
@@ -42,7 +40,11 @@ public class Main {
                     System.out.println("Nome do tutor:");
                     String userNome = input.nextLine();
 
-                    Tutor tutor = new Tutor(userCpf, userNome);
+                    System.out.println("Idade do tutor:");
+                    int userIdade= input.nextInt();
+                    input.nextLine();
+
+                    Tutor tutor = new Tutor(userCpf, userNome, userIdade);
 
                     /*//Criando tutor no banco de dados
                     connect.insertUser(user);*/
@@ -51,6 +53,11 @@ public class Main {
 
                     //Adicionando pelo menos 1 pet a cada usuario
                     do {
+
+                        System.out.println("Coleira do pet: ");
+                        int petColeira = input.nextInt();
+                        input.nextLine();
+
                         System.out.println("Especie do pet: (Cachorro ou Gato)");
                         String petEspecie = input.nextLine();
 
@@ -66,7 +73,7 @@ public class Main {
                             int petIdade = input.nextInt();
                             input.nextLine();
 
-                            Dog dog = new Dog(petEspecie, petName, petIdade);
+                            Dog dog = new Dog(petColeira, petEspecie, petName, petIdade);
                             tutor.addPet(dog);
 
                             /*//Criando pet e dog no banco de dados
@@ -82,7 +89,7 @@ public class Main {
                             int petIdade = input.nextInt();
                             input.nextLine();
 
-                            Cat cat = new Cat(petEspecie, petName, petIdade);
+                            Cat cat = new Cat(petColeira, petEspecie, petName, petIdade);
                             tutor.addPet(cat);
 
                             /*//Criando pet e cat no banco de dados
@@ -108,11 +115,13 @@ public class Main {
 
                 // Listar Cadastrados
                 case 2:
-                    System.out.println("Cadastrados: ");
 
-                    //software.showTutors();
+                    input.nextLine();
 
-                    ArrayList<Tutor> tutors = software.showTutors();
+                    System.out.println("Cpf do tutor: ");
+                    String pesq = input.nextLine();
+
+                    ArrayList<Tutor> tutors = software.showPets(pesq);
 
                     break;
 
