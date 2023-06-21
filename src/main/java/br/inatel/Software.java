@@ -4,29 +4,27 @@ import java.util.*;
 
 class Software {
 
-    private ArrayList<User> users;
+    private ArrayList<Tutor> tutors;
 
     public Software() {
-        this.users = new ArrayList<>();
+        this.tutors = new ArrayList<>();
     }
 
-    public void addUser(User user) {
-        users.add(user);
+    public void addTutor(Tutor tutor) {
+        tutors.add(tutor);
     }
 
-    public void showUsers() {
-        if (users.isEmpty()) {
-            System.out.println("Nao existem usuarios");
-        }
-        else {
-            System.out.println("Usuarios:");
-            for (User user : users) {
-                System.out.println(user);
+    public ArrayList<Tutor> showTutors() {
+        for (Tutor list : tutors) {
+            System.out.println("Tutor: " + list.getNome() + ", Cpf: " + list.getCpf());
+            ArrayList<Pet> pets = list.getPets();
+
+            System.out.println("Pets: ");
+            for (Pet listpets : pets) {
+                System.out.println("Especie: " + listpets.getEspecie() + ", Nome: " + listpets.getNome() + ", " + listpets.getIdade() + " ano(s)");
             }
         }
+        return tutors;
     }
 
-    public ArrayList<User> getUsers() {
-        return users;
-    }
 }

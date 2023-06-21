@@ -2,17 +2,28 @@ package br.inatel;
 
 public class Pet {
 
-    private int id;
+    private String especie;
     private String nome;
     private int idade;
-    private String raca;
-    private static int cont;
+    private int idPet;
 
     //construtor
-    public Pet(String nome, int idade, String raca) {
+    public Pet(String especie, String nome, int idade) {
+        this.especie = especie;
         this.nome = nome;
         this.idade = idade;
-        this.raca = raca;
+    }
+
+    public Pet() {
+        idPet++;
+    }
+
+    public String getEspecie() {
+        return especie;
+    }
+
+    public void setEspecie(String especie) {
+        this.especie = especie;
     }
 
     public String getNome() {
@@ -31,24 +42,11 @@ public class Pet {
         this.idade = idade;
     }
 
-    public String getRaca() {
-        return raca;
+    public int getIdPet() {
+        return idPet;
     }
 
-    public void setRaca(String raca) {
-        this.raca = raca;
+    public void setIdPet(int id) {
+        this.idPet = idPet;
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-	/*@Override
-    public String toString() {
-        return "Name: " + name + ", Age: " + age + ", Species: " + species;
-    }*/
 }

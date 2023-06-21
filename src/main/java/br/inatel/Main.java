@@ -1,6 +1,7 @@
 package br.inatel;
 
 import java.util.*;
+import java.sql.*;
 
 public class Main {
 
@@ -8,24 +9,30 @@ public class Main {
 
         Scanner input = new Scanner(System.in);
 
+        Database connect = new Database() {
+        };
+
         Software software = new Software();
 
         boolean flag = true;
 
-        System.out.println("Bem-vindo ao Software de Cadastro de Usuários!");
+        System.out.println("Bem-vindo!");
 
         // Criando o menu
         while (flag) {
             // Opções do menu
-            System.out.println("BEM VINDO AO MENU");
-            System.out.println("1- adicionar usuario");
-            System.out.println("2- listar usuarios");
+            System.out.println("--MENU--");
+            System.out.println("1- Adicionar Tutor e Pets");
+            System.out.println("2- Listar Cadastrados");
+            System.out.println("1- Adicionar tutor e pets");
+            System.out.println("2- Listar cadastrados");
             System.out.println("3- Sair");
             System.out.println("Entre com a sua opção: ");
 
             int opcao = input.nextInt(); // Entrada de opção do usuário
 
             switch (opcao) {
+                // Adicionar Tutor e Pets
                 case 1:
                     input.nextLine(); // Limpar o buffer do scanner
 
@@ -35,29 +42,58 @@ public class Main {
                     System.out.println("Nome do tutor:");
                     String userNome = input.nextLine();
 
-                    User user = new User(userCpf, userNome);
+                    Tutor tutor = new Tutor(userCpf, userNome);
+
+                    /*//Criando tutor no banco de dados
+                    connect.insertUser(user);*/
 
                     int aux = 1;
 
                     //Adicionando pelo menos 1 pet a cada usuario
                     do {
-                        System.out.println("Nome do pet:");
-                        String petName = input.nextLine();
+                        System.out.println("Especie do pet: (Cachorro ou Gato)");
+                        String petEspecie = input.nextLine();
 
-                        System.out.println("Idade do pet:");
-                        int petIdade = input.nextInt();
-                        input.nextLine();
+                        /*if (!(petEspecie.equals("Cachorro") || petEspecie.equals("Gato")))
+                            throw new especieInvalida();*/
 
-                        System.out.println("Raca do pet:");
-                        String petRaca = input.nextLine();
+                        if (petEspecie.equals("Cachorro")) {
 
-                        //System.out.println("Idade do pet:");
-                        //int petIdade = input.nextInt();
+                            System.out.println("Nome do cachorro:");
+                            String petName = input.nextLine();
 
-                        Pet pet = new Pet(petName, petIdade, petRaca);
-                        user.addPet(pet);
+                            System.out.println("Idade do cachorro:");
+                            int petIdade = input.nextInt();
+                            input.nextLine();
 
-                        System.out.println("Deseja adicionar outro pet ao usuario " + userNome + "? ");
+                            Dog dog = new Dog(petEspecie, petName, petIdade);
+                            tutor.addPet(dog);
+
+                            /*//Criando pet e dog no banco de dados
+                            connect.insertPet(dog);
+                            connect.insertDog(dog);*/
+                        }
+                        else if (petEspecie.equals("Gato")) {
+
+                            System.out.println("Nome do gato:");
+                            String petName = input.nextLine();
+
+                            System.out.println("Idade do gato:");
+                            int petIdade = input.nextInt();
+                            input.nextLine();
+
+                            Cat cat = new Cat(petEspecie, petName, petIdade);
+                            tutor.addPet(cat);
+
+                            /*//Criando pet e cat no banco de dados
+                            connect.insertPet(cat);
+                            connect.insertCat(cat);*/
+                        }
+                        else{
+                            System.out.println("Especie Invalida");
+                        }
+
+                        System.out.println("Deseja adicionar outro pet ao tutor: " + userNome + "? ");
                         System.out.println("1 - Sim");
                         System.out.println("2 - Nao");
 
@@ -66,23 +102,18 @@ public class Main {
 
                     } while (aux != 2);
 
-                    software.addUser(user);
+                    software.addTutor(tutor);
 
                     break;
 
+                // Listar Cadastrados
                 case 2:
-                    System.out.println("Usuários cadastrados: ");
+                    System.out.println("Cadastrados: ");
 
-                    ArrayList<User> users = software.getUsers();
-                    for (User user2 : users) {
-                        System.out.println(user2.getNome() + ", Cpf: " + user2.getCpf());
-                        ArrayList<Pet> pets = user2.getPets();
+                    //software.showTutors();
 
-                        System.out.println("Pets: ");
-                        for (Pet pet : pets) {
-                            System.out.println(pet.getNome() + ", " + pet.getIdade() + " anos, raca: " + pet.getRaca());
-                        }
-                    }
+                    ArrayList<Tutor> tutors = software.showTutors();
+
                     break;
 
                 case 3:
