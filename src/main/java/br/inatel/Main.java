@@ -1,39 +1,93 @@
 package br.inatel;
 
+import java.util.*;
+
 public class Main {
-    public static void Main(String[] args) {
-        Database db = new Database();
-        db.connect();
 
-        //Criar usuarios que serao inseridos no banco de dados
-        User user1 = new User("Eduardo", "111.111.111-11");
-        User user2 = new User("Thiagp", "222.222.222-22");
-        User user3 = new User("Paulo", "333.333.333-33");
+    public static void main(String[] args) {
 
-        /**
-         *         //Inserir esses usuarios no bando de dados
-         *         db.insertUser(user1);
-         *         db.insertUser(user2);
-         *         db.insertUser(user3);
-         *
-         * */
+        Scanner input = new Scanner(System.in);
 
-        //Mostrando os usuarios
-        db.researchUser();
+        Software software = new Software();
 
-        //Atualizando
-        System.out.println("Atualizar o nome de um usuario");
+        boolean flag = true;
 
-        //Mostrando os usuarios
-        db.researchUser();
+        System.out.println("Bem-vindo ao Software de Cadastro de Usuários!");
 
-        db.updateUser(1, "Dudu");
+        // Criando o menu
+        while (flag) {
+            // Opções do menu
+            System.out.println("BEM VINDO AO MENU");
+            System.out.println("1- adicionar usuario");
+            System.out.println("2- listar usuarios");
+            System.out.println("3- Sair");
+            System.out.println("Entre com a sua opção: ");
 
-        //Deletando um usuario
-        System.out.println("Deletando um usuario");
-        db.deleteUser(2);
+            int opcao = input.nextInt(); // Entrada de opção do usuário
 
-        //Mostrando os usuarios
-        db.researchUser();
+            switch (opcao) {
+                case 1:
+                    input.nextLine(); // Limpar o buffer do scanner
+
+                    System.out.println("Cpf do tutor:");
+                    String userCpf = input.nextLine();
+
+                    System.out.println("Nome do tutor:");
+                    String userNome = input.nextLine();
+
+                    User user = new User(userCpf, userNome);
+
+                    int aux = 1;
+
+                    //Adicionando pelo menos 1 pet a cada usuario
+                    do {
+                        System.out.println("Nome do pet:");
+                        String petName = input.nextLine();
+
+                        System.out.println("Idade do pet:");
+                        int petIdade = input.nextInt();
+                        input.nextLine();
+
+                        System.out.println("Raca do pet:");
+                        String petRaca = input.nextLine();
+
+                        //System.out.println("Idade do pet:");
+                        //int petIdade = input.nextInt();
+
+                        Pet pet = new Pet(petName, petIdade, petRaca);
+                        user.addPet(pet);
+
+                        System.out.println("Deseja adicionar outro pet ao usuario " + userNome + "? ");
+                        System.out.println("1 - Sim");
+                        System.out.println("2 - Nao");
+
+                        aux = input.nextInt();
+                        input.nextLine();
+
+                    } while (aux != 2);
+
+                    software.addUser(user);
+
+                    break;
+
+                case 2:
+                    System.out.println("Usuários cadastrados: ");
+
+                    ArrayList<User> users = software.getUsers();
+                    for (User user2 : users) {
+                        System.out.println(user2.getNome() + ", Cpf: " + user2.getCpf());
+                        ArrayList<Pet> pets = user2.getPets();
+
+                        System.out.println("Pets: ");
+                        for (Pet pet : pets) {
+                            System.out.println(pet.getNome() + ", " + pet.getIdade() + " anos, raca: " + pet.getRaca());
+                        }
+                    }
+                    break;
+
+                case 3:
+
+            }
+        }
     }
 }

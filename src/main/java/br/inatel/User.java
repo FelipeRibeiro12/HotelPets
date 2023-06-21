@@ -1,28 +1,34 @@
 package br.inatel;
 
-public class User {
-    private String nome;
+import java.util.*;
+
+class User {
+
+    private int id;
     private String cpf;
-    public int id;
+    private String nome;
+    private ArrayList<Pet> pets;
+    private static int cont;
 
-    public User(String nome, String cpf) {
-        this.nome = nome;
+    public User(String cpf, String nome) {
         this.cpf = cpf;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
         this.nome = nome;
+        this.pets = new ArrayList<>();
+    }
+
+    public void addPet(Pet pet) {
+        pets.add(pet);
+    }
+
+    public ArrayList<Pet> getPets() {
+        return pets;
     }
 
     public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public String getNome() {
+        return nome;
     }
 }
