@@ -46,8 +46,8 @@ public class Main {
 
                     Tutor tutor = new Tutor(userCpf, userNome, userIdade);
 
-                    /*//Criando tutor no banco de dados
-                    connect.insertUser(user);*/
+                    //Criando tutor no banco de dados
+                    connect.insertTutor(tutor);
 
                     int aux = 1;
 
@@ -57,9 +57,11 @@ public class Main {
                         System.out.println("Coleira do pet: ");
                         int petColeira = input.nextInt();
                         input.nextLine();
+                        System.out.println();
 
                         System.out.println("Especie do pet: (Cachorro ou Gato)");
                         String petEspecie = input.nextLine();
+                        System.out.println();
 
                         /*if (!(petEspecie.equals("Cachorro") || petEspecie.equals("Gato")))
                             throw new especieInvalida();*/
@@ -68,36 +70,42 @@ public class Main {
 
                             System.out.println("Nome do cachorro:");
                             String petName = input.nextLine();
+                            System.out.println();
 
-                            System.out.println("Idade do cachorro:");
-                            int petIdade = input.nextInt();
+                            System.out.println("Peso do cachorro:");
+                            int petPeso = input.nextInt();
                             input.nextLine();
+                            System.out.println();
 
-                            Dog dog = new Dog(petColeira, petEspecie, petName, petIdade);
+                            Dog dog = new Dog(petColeira, petEspecie, petName, petPeso);
                             tutor.addPet(dog);
+                            System.out.println();
 
-                            /*//Criando pet e dog no banco de dados
+                            //Criando pet e dog no banco de dados
                             connect.insertPet(dog);
-                            connect.insertDog(dog);*/
+                            connect.insertDog(dog);
                         }
                         else if (petEspecie.equals("Gato")) {
 
                             System.out.println("Nome do gato:");
                             String petName = input.nextLine();
+                            System.out.println();
 
-                            System.out.println("Idade do gato:");
-                            int petIdade = input.nextInt();
+                            System.out.println("Peso do gato:");
+                            int petPeso = input.nextInt();
                             input.nextLine();
+                            System.out.println();
 
-                            Cat cat = new Cat(petColeira, petEspecie, petName, petIdade);
+                            Cat cat = new Cat(petColeira, petEspecie, petName, petPeso);
                             tutor.addPet(cat);
 
-                            /*//Criando pet e cat no banco de dados
+                            //Criando pet e cat no banco de dados
                             connect.insertPet(cat);
-                            connect.insertCat(cat);*/
+                            connect.insertCat(cat);
                         }
                         else{
                             System.out.println("Especie Invalida");
+                            System.out.println();
                         }
 
                         System.out.println("Deseja adicionar outro pet ao tutor: " + userNome + "? ");
@@ -106,6 +114,7 @@ public class Main {
 
                         aux = input.nextInt();
                         input.nextLine();
+                        System.out.println();
 
                     } while (aux != 2);
 
@@ -122,6 +131,7 @@ public class Main {
                     String pesq = input.nextLine();
 
                     ArrayList<Tutor> tutors = software.showPets(pesq);
+                    System.out.println();
 
                     break;
 

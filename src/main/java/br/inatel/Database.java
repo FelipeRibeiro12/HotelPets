@@ -11,7 +11,7 @@ public abstract class Database {
 
     static final String user = "root";
     static final String password = "root";
-    static final String database = "projetoPOOeBD";
+    static final String database = "bancohotelpets";
 
     static final String url = "jdbc:mysql://localhost:3306/" + database + "?useTimezone=true&serverTimezone=UTC&useSSL=false";
     public boolean check = false;
@@ -26,15 +26,16 @@ public abstract class Database {
         }
     }
 
-    /*--------------------INSERINDO NOVO REGISTRO DE DOG--------------------
+    //--------------------INSERINDO NOVO REGISTRO DE DOG--------------------
     public boolean insertDog(Dog dog){
         connect();
-        String sql = "INSERT INTO Dog(especie,nome,idade) VALUES (?,?,?)";
+        String sql = "INSERT INTO dog(coleira, especie, nome, peso) VALUES (?,?,?,?)";
         try{
             pst = connection.prepareStatement(sql);
-            pst.setFloat(1,dog.getEspecie());// concatena nome no primeiro ? do comando
-            pst.setInt(2,dog.getNome());
-            pst.setInt(3,dog.getIdade());
+            pst.setInt(1,dog.getColeira());// concatena nome no primeiro ? do comando
+            pst.setString(2,dog.getEspecie());
+            pst.setString(3,dog.getNome());
+            pst.setInt(4,dog.getPeso());
             pst.execute();
             check = true;
         }catch (SQLException e){
@@ -56,12 +57,13 @@ public abstract class Database {
     //--------------------INSERINDO NOVO REGISTRO DE CAT--------------------
     public boolean insertCat(Cat cat){
         connect();
-        String sql = "INSERT INTO Cat(especie,nome,idade) VALUES (?,?,?)";
+        String sql = "INSERT INTO cat(coleira, especie, nome, peso) VALUES (?,?,?,?)";
         try{
             pst = connection.prepareStatement(sql);
-            pst.setFloat(1,cat.getEspecie());// concatena nome no primeiro ? do comando
-            pst.setInt(2,cat.getNome());
-            pst.setInt(3,cat.getIdade());
+            pst.setInt(1,cat.getColeira());// concatena nome no primeiro ? do comando
+            pst.setString(2,cat.getEspecie());
+            pst.setString(3,cat.getNome());
+            pst.setInt(4,cat.getPeso());
             pst.execute();
             check = true;
         }catch (SQLException e){
@@ -84,12 +86,13 @@ public abstract class Database {
     //--------------------INSERINDO NOVO REGISTRO DE PET--------------------
     public boolean insertPet(Pet pet){
         connect();
-        String sql = "INSERT INTO Pet(especie,nome,idade) VALUES (?,?,?)";
+        String sql = "INSERT INTO pet(coleira, especie, nome, peso) VALUES (?,?,?,?)";
         try{
             pst = connection.prepareStatement(sql);
-            pst.setFloat(1,dog.getEspecie());// concatena nome no primeiro ? do comando
-            pst.setInt(2,dog.getNome());
-            pst.setInt(3,dog.getIdade());
+            pst.setInt(1,pet.getColeira());// concatena nome no primeiro ? do comando
+            pst.setString(2,pet.getEspecie());
+            pst.setString(3,pet.getNome());
+            pst.setInt(4,pet.getPeso());
             pst.execute();
             check = true;
         }catch (SQLException e){
@@ -105,8 +108,34 @@ public abstract class Database {
             }
         }
         return check;
-    }*/
+    }
 
+    //--------------------INSERINDO NOVO REGISTRO DE TUTOR--------------------
+    public boolean insertTutor(Tutor t){
+        connect();
+        String sql = "INSERT INTO tutor(cpf, nome, idade) VALUES (?,?,?)";
+        try{
+            pst = connection.prepareStatement(sql);
+            pst.setString(1,t.getCpf());// concatena nome no primeiro ? do comando
+            pst.setString(2, t.getNome());
+            pst.setInt(3, t.getIdade());
+            pst.execute();
+            check = true;
+        }catch (SQLException e){
+            System.out.println("Erro de conexão: " + e.getMessage());
+            check = false;
+        }
+        finally {
+            try{
+                connection.close();
+                pst.close();
+            } catch (SQLException e){
+                System.out.println("Erro ao fechar conexão: " + e.getMessage());
+            }
+        }
+        return check;
+    }
+    //------------------------------------
 }
 
     /*Connection conn; // Resposavel por fazer a conexao com o MySQL

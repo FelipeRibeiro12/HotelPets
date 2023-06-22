@@ -21,7 +21,7 @@ class Software {
 
             System.out.println("Pets de " + list.getNome() + " (" + list.getCpf() + "): ");
             for (Pet listpets : pets) {
-                System.out.println("Coleira: " + listpets.getColeira() + ", Especie: " + listpets.getEspecie() + ", Nome: " + listpets.getNome() + ", " + listpets.getIdade() + " ano(s)");
+                System.out.println("Coleira: " + listpets.getColeira() + ", Especie: " + listpets.getEspecie() + ", Nome: " + listpets.getNome() + ", " + listpets.getPeso() + " kg(s)");
             }
         }
         return tutors;
@@ -37,11 +37,10 @@ class Software {
                 ArrayList<Pet> pets = list.getPets();
                 System.out.println("Pets de " + list.getNome() + " (" + list.getCpf() + "): ");
                 for (Pet listpets : pets) {
-                    System.out.println("Coleira: " + listpets.getColeira() + ", Especie: " + listpets.getEspecie() + ", Nome: " + listpets.getNome() + ", " + listpets.getIdade() + " ano(s)");
+                    System.out.println("Coleira: " + listpets.getColeira() + ", Especie: " + listpets.getEspecie() + ", Nome: " + listpets.getNome() + ", " + listpets.getPeso() + " Kg(s)");
                 }
             }
         }
         return tutors;
     }
-
 }

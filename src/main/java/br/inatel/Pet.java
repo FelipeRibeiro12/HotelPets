@@ -5,26 +5,22 @@ public class Pet {
     private int coleira; //Id
     private String especie;
     private String nome;
-    private int idade;
+    private int peso;
 
     //construtor
     public Pet(int coleira, String especie, String nome, int idade) {
         this.coleira = coleira;
         this.especie = especie;
         this.nome = nome;
-        this.idade = idade;
+        this.peso = peso;
     }
 
-    /*public Pet() {
-        idPet++;
-    }*/
-
-    public String getEspecie() {
-        return especie;
+    public int getColeira() {
+        return coleira;
     }
 
-    public void setEspecie(String especie) {
-        this.especie = especie;
+    public void setColeira(int coleira) {
+        this.coleira = coleira;
     }
 
     public String getNome() {
@@ -35,19 +31,19 @@ public class Pet {
         this.nome = nome;
     }
 
-    public int getIdade() {
-        return idade;
+    public String getEspecie() {
+        return especie;
     }
 
-    public void setIdade(int idade) {
-        this.idade = idade;
+    public void setEspecie(String especie) {
+        this.especie = especie;
     }
 
-    public int getColeira() {
-        return coleira;
+    public int getPeso() {
+        return peso;
     }
 
-    public void setColeira(int coleira) {
-        this.coleira = coleira;
+    public void setIdade(int peso) {
+        this.peso = peso;
     }
 }
