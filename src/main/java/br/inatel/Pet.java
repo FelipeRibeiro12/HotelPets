@@ -5,14 +5,14 @@ public class Pet {
     private int coleira; //Id
     private String especie;
     private String nome;
-    private int peso;
+    private String tCpf;
 
     //construtor
-    public Pet(int coleira, String especie, String nome, int idade) {
+    public Pet(int coleira, String especie, String nome, String tCpf) {
         this.coleira = coleira;
         this.especie = especie;
         this.nome = nome;
-        this.peso = peso;
+        this.tCpf = tCpf;
     }
 
     public int getColeira() {
@@ -39,11 +39,11 @@ public class Pet {
         this.especie = especie;
     }
 
-    public int getPeso() {
-        return peso;
+    public String gettCpf() {
+        return tCpf;
     }
 
-    public void setIdade(int peso) {
-        this.peso = peso;
+    public void settCpf(String tCpf) {
+        this.tCpf = tCpf;
     }
 }

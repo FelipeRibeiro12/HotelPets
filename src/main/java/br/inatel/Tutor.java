@@ -2,7 +2,7 @@ package br.inatel;
 
 import java.util.*;
 
-class Tutor {
+public class Tutor {
 
     private String cpf; //Id
     private String nome;

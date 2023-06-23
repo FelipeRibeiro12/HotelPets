@@ -21,13 +21,13 @@ class Software {
 
             System.out.println("Pets de " + list.getNome() + " (" + list.getCpf() + "): ");
             for (Pet listpets : pets) {
-                System.out.println("Coleira: " + listpets.getColeira() + ", Especie: " + listpets.getEspecie() + ", Nome: " + listpets.getNome() + ", " + listpets.getPeso() + " kg(s)");
+                System.out.println("Coleira: " + listpets.getColeira() + ", Especie: " + listpets.getEspecie() + ", Nome: " + listpets.getNome());
             }
         }
         return tutors;
     }
 
-    public ArrayList<Tutor> showPets(String pesquisa) {
+    /*public ArrayList<Tutor> showPets(String pesquisa) {
 
         for (Tutor list : tutors) {
 
@@ -42,5 +42,5 @@ class Software {
             }
         }
         return tutors;
-    }
+    }*/
 }

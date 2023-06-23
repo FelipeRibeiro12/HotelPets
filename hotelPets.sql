@@ -27,11 +27,10 @@ CREATE TABLE IF NOT EXISTS `bancohotelpets`.`pet` (
 	`coleira` INT NOT NULL,
 	`especie` VARCHAR(45) NOT NULL,
 	`nome` VARCHAR(45) NOT NULL,
-	`peso` INT NOT NULL,
-	`cpf` INT NOT NULL,
+	`tcpf` INT NOT NULL,
 	PRIMARY KEY (`coleira`),
     FOREIGN KEY (`cpf`) REFERENCES `bancohotelpets`.`tutor`(`cpf`)
-	ON DELETE NO ACTION ON UPDATE NO ACTION
+	ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE = InnoDB;
 
 -- -----------------------------------------------------
@@ -41,7 +40,8 @@ CREATE TABLE IF NOT EXISTS `bancohotelpets`.`dog` (
     coleira INT PRIMARY KEY,
     -- Cor VARCHAR(50),
     FOREIGN KEY (`coleira`) REFERENCES `bancohotelpets`.`pet`(`coleira`)
-);
+    ON DELETE CASCADE ON UPDATE CASCADE
+)ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Tabela de Gatos (Herda de Pets)
@@ -50,7 +50,10 @@ CREATE TABLE IF NOT EXISTS `bancohotelpets`.`cat` (
     coleira INT PRIMARY KEY,
     -- Cor VARCHAR(50),
     FOREIGN KEY (`coleira`) REFERENCES `BancoHotelPets`.`pet`(`coleira`)
-);
+    ON DELETE CASCADE ON UPDATE CASCADE
+)ENGINE = InnoDB;
+
+SELECT * FROM tutor;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
