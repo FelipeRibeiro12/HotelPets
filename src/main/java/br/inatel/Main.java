@@ -7,7 +7,7 @@ import java.util.*;
 
 public class Main {
 
-    public static void main(String[] args) throws InvalidEspecieException, InvalidadeAgeException {
+    public static void main(String[] args) throws InvalidEspecieException, InvalidadeAgeException, InvalidOptionException {
 
         Scanner input = new Scanner(System.in);
 
@@ -26,10 +26,12 @@ public class Main {
             System.out.println("--MENU--");
             System.out.println("1- Adicionar Tutor e Pets;");
             System.out.println("2- Atualizar idade do Tutor;");
-            System.out.println("3- Listar Pets de um Tutor;");
-            System.out.println("4- Listar todos os Tutores;");
-            System.out.println("5- Remover um Tutor e seus Pets;");
-            System.out.println("6- Remover tudo.");
+            System.out.println("3- Listar os Cachorros ou Gatos;");
+            System.out.println("4- Listar Pets de um Tutor;");
+            System.out.println("5- Listar todos os Tutores;");
+            System.out.println("6- Remover um Tutor e seus Pets;");
+            System.out.println("7- Remover tudo;");
+            System.out.println("8- Sair.");
             System.out.println("Entre com a sua opção: ");
 
             int opcao = input.nextInt(); // Entrada de opção do usuário
@@ -64,9 +66,13 @@ public class Main {
 
                     //Adicionando pelo menos 1 pet a cada usuario
                     do {
+                        Pet pet = new Pet();
 
+                        pet.settCpf(userCpf);
                         System.out.println("Coleira do pet: ");
                         int petColeira = input.nextInt();
+                        pet.setColeira(petColeira);
+
                         input.nextLine();
                         System.out.println();
 
@@ -77,37 +83,46 @@ public class Main {
                         if (!(petEspecie.equals("Cachorro") || petEspecie.equals("Gato")))
                             throw new InvalidEspecieException();
 
-                        if (petEspecie.equals("Cachorro")) {
+                        else {
+                            pet.setEspecie(petEspecie);
 
-                            System.out.println("Nome do cachorro:");
+                            System.out.println("Nome do pet:");
                             String petName = input.nextLine();
+                            pet.setNome(petName);
+                            connect.insertPet(pet);
+
                             System.out.println();
 
-                            Dog dog = new Dog(petColeira, petEspecie, petName, userCpf);
-                            tutor.addPet(dog);
-                            System.out.println();
+                            if (petEspecie.equals("Cachorro")) {
+                                Dog dog = new Dog();
 
-                            //Criando pet e dog no banco de dados
-                            connect.insertPet(dog);
-                            //connect.insertDog(dog);
-                        }
-                        else if (petEspecie.equals("Gato")) {
+                                dog.setColeira(petColeira);
 
-                            System.out.println("Nome do gato:");
-                            String petName = input.nextLine();
-                            System.out.println();
+                                System.out.println("Cor do cachorro: ");
+                                String dogCor = input.nextLine();
+                                dog.setCor(dogCor);
+                                connect.insertDog(dog);
 
-                            Cat cat = new Cat(petColeira, petEspecie, petName, userCpf);
-                            tutor.addPet(cat);
+                                System.out.println();
+                            }
 
-                            //Criando pet e cat no banco de dados
-                            connect.insertPet(cat); // problema com a coluna peso
-                            //connect.insertCat(cat); //problema com coluna especie e peso
+                            else {
+                                Cat cat = new Cat();
+
+                                cat.setColeira(petColeira);
+
+                                System.out.println("Pelagem do gato: ");
+                                String catPelo = input.nextLine();
+                                cat.setPelagem(catPelo);
+                                connect.insertCat(cat);
+
+                                System.out.println();
+                            }
                         }
 
                         System.out.println("Deseja adicionar outro pet ao tutor: " + userNome + "? ");
-                        System.out.println("1 - Sim");
-                        System.out.println("2 - Nao");
+                        System.out.println("1- Sim");
+                        System.out.println("2- Nao");
 
                         aux = input.nextInt();
                         input.nextLine();
@@ -120,7 +135,7 @@ public class Main {
                     break;
 
                 // Atualizar idade do Tutor
-                case 2://
+                case 2:
 
                     input.nextLine();
 
@@ -138,8 +153,26 @@ public class Main {
 
                     break;
 
+                case 3:
+
+                    input.nextLine();
+
+                    System.out.println("1- Listar os Cachorros;");
+                    System.out.println("2- Listar os Gatos");
+                    int aux3 = input.nextInt();
+
+                    if(aux3 == 1)
+                        connect.researchDogs();
+
+                    else if(aux3 == 2)
+                        connect.researchCats();
+
+                    else throw new InvalidOptionException();
+
+                    break;
+
                 // Listar Pets de um Tutor
-                case 3://ok
+                case 4:
 
                     input.nextLine();
 
@@ -151,7 +184,7 @@ public class Main {
                     break;
 
                 // Listar todos os Tutores
-                case 4://ok
+                case 5:
 
                     input.nextLine();
 
@@ -162,7 +195,7 @@ public class Main {
                     break;
 
                 // Remover um Tutor e seus Pets
-                case 5://ok
+                case 6:
 
                     input.nextLine();
 
@@ -174,7 +207,7 @@ public class Main {
                     break;
 
                 // Remover tudo
-                case 6:
+                case 7:
 
                     input.nextLine();
 
@@ -192,6 +225,14 @@ public class Main {
                         connect.deleteAll();
 
                     break;
+
+                case 8:
+                    flag = false;
+
+                    System.out.println("Programa encerrado.");
+
+                    break;
+
 
             }
         }

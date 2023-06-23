@@ -14,8 +14,8 @@ USE `bancohotelpets` ;
 -- Tabela de Tutores
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bancohotelpets`.`tutor` (
-	`cpf` INT NOT NULL,
-    `nome` VARCHAR(100) NOT NULL,
+	`cpf` VARCHAR(1000) NOT NULL,
+    `nome` VARCHAR(1000) NOT NULL,
     `idade` INT NOT NULL,
 	PRIMARY KEY (`cpf`)
 )ENGINE = InnoDB;
@@ -25,20 +25,20 @@ CREATE TABLE IF NOT EXISTS `bancohotelpets`.`tutor` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bancohotelpets`.`pet` (
 	`coleira` INT NOT NULL,
-	`especie` VARCHAR(45) NOT NULL,
-	`nome` VARCHAR(45) NOT NULL,
-	`tcpf` INT NOT NULL,
+	`especie` VARCHAR(1000) NOT NULL,
+	`nome` VARCHAR(1000) NOT NULL,
+	`tcpf` VARCHAR(1000) NOT NULL,
 	PRIMARY KEY (`coleira`),
-    FOREIGN KEY (`cpf`) REFERENCES `bancohotelpets`.`tutor`(`cpf`)
-	ON DELETE CASCADE ON UPDATE CASCADE
-)ENGINE = InnoDB;
+    FOREIGN KEY (`tcpf`) REFERENCES `bancohotelpets`.`tutor`(`cpf`)
+    ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Tabela de Cachorros (Herda de Pets)
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bancohotelpets`.`dog` (
     coleira INT PRIMARY KEY,
-    -- Cor VARCHAR(50),
+    cor VARCHAR(1000),
     FOREIGN KEY (`coleira`) REFERENCES `bancohotelpets`.`pet`(`coleira`)
     ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE = InnoDB;
@@ -48,12 +48,12 @@ CREATE TABLE IF NOT EXISTS `bancohotelpets`.`dog` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bancohotelpets`.`cat` (
     coleira INT PRIMARY KEY,
-    -- Cor VARCHAR(50),
-    FOREIGN KEY (`coleira`) REFERENCES `BancoHotelPets`.`pet`(`coleira`)
+    pelagem VARCHAR(1000),
+    FOREIGN KEY (`coleira`) REFERENCES `bancohotelpets`.`pet`(`coleira`)
     ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE = InnoDB;
 
-SELECT * FROM tutor;
+SELECT * FROM cat;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

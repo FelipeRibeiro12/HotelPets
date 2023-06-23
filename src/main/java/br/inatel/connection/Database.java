@@ -31,13 +31,13 @@ public abstract class Database {
     //--------------------INSERINDO NOVO REGISTRO DE DOG--------------------
     public boolean insertDog(Dog dog) {
         connect();
-        String sql = "INSERT INTO dog(coleira, especie, nome, tCpf) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO dog(coleira, cor) VALUES (?,?)";
         try {
             pst = connection.prepareStatement(sql);
             pst.setInt(1, dog.getColeira());// concatena nome no primeiro ? do comando
-            pst.setString(2, dog.getEspecie());
-            pst.setString(3, dog.getNome());
-            pst.setString(4, dog.gettCpf());
+            pst.setString(2, dog.getCor());
+            //pst.setString(3, dog.getNome());
+            //pst.setString(4, dog.gettCpf());
             pst.execute();
             check = true;
         } catch (SQLException e) {
@@ -58,13 +58,13 @@ public abstract class Database {
     //--------------------INSERINDO NOVO REGISTRO DE CAT--------------------
     public boolean insertCat(Cat cat) {
         connect();
-        String sql = "INSERT INTO cat(coleira, especie, nome, tCpf) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO cat(coleira, pelagem) VALUES (?,?)";
         try {
             pst = connection.prepareStatement(sql);
             pst.setInt(1, cat.getColeira());// concatena nome no primeiro ? do comando
-            pst.setString(2, cat.getEspecie());
-            pst.setString(3, cat.getNome());
-            pst.setString(4, cat.gettCpf());
+            pst.setString(2, cat.getPelagem());
+            //pst.setString(3, cat.getNome());
+            //pst.setString(4, cat.gettCpf());
             pst.execute();
             check = true;
         } catch (SQLException e) {
@@ -146,8 +146,12 @@ public abstract class Database {
             result = pst.executeQuery();
 
             while(result.next()){
-                Pet petTemp = new Pet(result.getInt("coleira"), result.getString("nome"), result.getString("especie"), result.getString("tcpf"));
-                //tutorTemp.id = result.getInt("cpf");
+                Pet petTemp = new Pet();
+
+                petTemp.setColeira(result.getInt("coleira"));
+                petTemp.setNome(result.getString("nome"));
+                petTemp.setEspecie(result.getString("especie"));
+
                 System.out.println("Coleira = " + petTemp.getColeira());
                 System.out.println("Nome = " + petTemp.getNome());
                 System.out.println("Especie = " + petTemp.getEspecie());
@@ -166,6 +170,76 @@ public abstract class Database {
             }
         }
         return Pets;
+    }
+
+    //------------------------BUSCAR OS CACHORROS----------------------------
+    public ArrayList<Dog> researchDogs() {
+        connect();
+        ArrayList<Dog> Dogs = new ArrayList<>();
+        String sql = "SELECT * FROM dog";
+
+        try{
+            statement = connection.createStatement();
+            result = statement.executeQuery(sql);
+
+            while(result.next()){
+                Dog dogTemp = new Dog();
+
+                dogTemp.setColeira(result.getInt("coleira"));
+                dogTemp.setCor(result.getString("cor"));
+
+                System.out.println("Coleira = " + dogTemp.getColeira());
+                System.out.println("Cor = " + dogTemp.getCor());
+                System.out.println();
+                Dogs.add(dogTemp);
+            }
+        }catch(SQLException e){
+            System.out.println("Erro de conexao " + e.getMessage());
+        }finally {
+            try {
+                connection.close();
+                statement.close();
+                result.close();
+            } catch (SQLException e) {
+                System.out.println("Erro de conexao " + e.getMessage());
+            }
+        }
+        return Dogs;
+    }
+
+    //------------------------BUSCAR OS GATOS----------------------------
+    public ArrayList<Cat> researchCats() {
+        connect();
+        ArrayList<Cat> Cats = new ArrayList<>();
+        String sql = "SELECT * FROM cat";
+
+        try{
+            statement = connection.createStatement();
+            result = statement.executeQuery(sql);
+
+            while(result.next()){
+                Cat catTemp = new Cat();
+
+                catTemp.setColeira(result.getInt("coleira"));
+                catTemp.setPelagem(result.getString("pelagem"));
+
+                System.out.println("Coleira = " + catTemp.getColeira());
+                System.out.println("Pelagem = " + catTemp.getPelagem());
+                System.out.println();
+                Cats.add(catTemp);
+            }
+        }catch(SQLException e){
+            System.out.println("Erro de conexao " + e.getMessage());
+        }finally {
+            try {
+                connection.close();
+                statement.close();
+                result.close();
+            } catch (SQLException e) {
+                System.out.println("Erro de conexao " + e.getMessage());
+            }
+        }
+        return Cats;
     }
 
     //------------------------BUSCAR OS TUTORES----------------------------
@@ -200,7 +274,7 @@ public abstract class Database {
         return Tutors;
     }
 
-    //------------------------ATUALIZAR O NOME DO TUTOR NO REGISTRO DO DATABASE----------------------------
+    //------------------------ATUALIZAR O NOME DO TUTOR----------------------------
     public boolean updateTutor(String cpf, int idade) {
         connect();
         String sql = "UPDATE tutor SET idade=? WHERE cpf=?";

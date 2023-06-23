@@ -7,13 +7,12 @@ public class Pet {
     private String nome;
     private String tCpf;
 
-    //construtor
-    public Pet(int coleira, String especie, String nome, String tCpf) {
+    /*public Pet(int coleira, String especie, String nome, String tCpf) {
         this.coleira = coleira;
         this.especie = especie;
         this.nome = nome;
         this.tCpf = tCpf;
-    }
+    }*/
 
     public int getColeira() {
         return coleira;
@@ -45,5 +44,11 @@ public class Pet {
 
     public void settCpf(String tCpf) {
         this.tCpf = tCpf;
+    }
+
+    public void mostrarInfos() {
+        System.out.println("Coleira: " + coleira);
+        System.out.println("Nome: " + nome);
+        System.out.println("Especie: " + especie);
     }
 }

@@ -40,4 +40,10 @@ public class Tutor {
     public void setIdade(int idade) {
         this.idade = idade;
     }
+
+    public void mostrarInfos() {
+        System.out.println("Cpf: " + cpf);
+        System.out.println("Nome: " + nome);
+        System.out.println("Idade: " + idade);
+    }
 }
