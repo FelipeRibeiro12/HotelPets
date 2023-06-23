@@ -51,11 +51,18 @@ public class Main {
                     System.out.println();
 
                     System.out.println("Idade do tutor:");
-                    int userIdade= input.nextInt();
-                    input.nextLine();
-                    System.out.println();
+                    int auxUserIdade= input.nextInt();
+                    int userIdade;
+
+                    if(auxUserIdade < 18)
+                        throw new InvalidadeAgeException();
+
+                    else
+                        userIdade = auxUserIdade;
 
                     Tutor tutor = new Tutor(userCpf, userNome, userIdade);
+
+                    System.out.println();
 
                     //Criando tutor no banco de dados
                     connect.insertTutor(tutor);
@@ -136,25 +143,24 @@ public class Main {
 
                 // Atualizar idade do Tutor
                 case 2:
-
                     input.nextLine();
 
                     System.out.println("Cpf do tutor: ");
-                    String att = input.nextLine();
+                    String cpfAtt = input.nextLine();
+                    System.out.println();
 
                     System.out.println("Nova idade do tutor: ");
-                    int newidade = input.nextInt();
+                    int newIdade = input.nextInt();
 
-                    if(newidade < 18)
+                    if(newIdade < 18)
                         throw new InvalidadeAgeException();
 
                     else
-                        connect.updateTutor(att, newidade);
+                        connect.updateTutor(cpfAtt, newIdade);
 
                     break;
 
                 case 3:
-
                     input.nextLine();
 
                     System.out.println("1- Listar os Cachorros;");
@@ -173,7 +179,6 @@ public class Main {
 
                 // Listar Pets de um Tutor
                 case 4:
-
                     input.nextLine();
 
                     System.out.println("Cpf do tutor: ");
@@ -185,7 +190,6 @@ public class Main {
 
                 // Listar todos os Tutores
                 case 5:
-
                     input.nextLine();
 
                     System.out.println("Tutores: ");
@@ -196,7 +200,6 @@ public class Main {
 
                 // Remover um Tutor e seus Pets
                 case 6:
-
                     input.nextLine();
 
                     System.out.println("Cpf do tutor a ser removido: ");
@@ -208,7 +211,6 @@ public class Main {
 
                 // Remover tudo
                 case 7:
-
                     input.nextLine();
 
                     System.out.println("Voce esta prestes a apagar tudo!");

@@ -4,12 +4,12 @@ import java.util.*;
 
 public class Tutor {
 
-    private String cpf; //Id
+    private String cpf; // Fk
     private String nome;
     private int idade;
     private ArrayList<Pet> pets;
-    private static int cont;
 
+    // Construtor
     public Tutor(String cpf, String nome, int idade) {
         this.cpf = cpf;
         this.nome = nome;

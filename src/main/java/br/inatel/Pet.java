@@ -2,17 +2,10 @@ package br.inatel;
 
 public class Pet {
 
-    private int coleira; //Id
+    private int coleira; // Pk
     private String especie;
     private String nome;
-    private String tCpf;
-
-    /*public Pet(int coleira, String especie, String nome, String tCpf) {
-        this.coleira = coleira;
-        this.especie = especie;
-        this.nome = nome;
-        this.tCpf = tCpf;
-    }*/
+    private String tCpf; // Fk
 
     public int getColeira() {
         return coleira;

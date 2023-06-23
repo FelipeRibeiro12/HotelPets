@@ -2,13 +2,9 @@ package br.inatel;
 
 public class Cat extends Pet {
 
-    public static int coleiraPet;
+    public static int coleiraPet; // Pk
 
     private String pelagem;
-
-    /*public Cat(int coleira, String nome, String especie, String tcpf) {
-        super(coleira, nome, especie, tcpf);
-    }*/
 
     public String getPelagem() {
         return pelagem;

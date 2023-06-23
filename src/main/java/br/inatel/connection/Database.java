@@ -7,10 +7,10 @@ import java.util.*;
 
 public abstract class Database {
 
-    Connection connection; //Responsavel pela conexao
-    Statement statement; //Prepara as consultas do SELECT
-    ResultSet result; //Executa as consultas do SELECT
-    PreparedStatement pst; //Prepara as querys de manipulacao
+    Connection connection; // Responsavel pela conexao
+    Statement statement; // Prepara as consultas do SELECT
+    ResultSet result; // Executa as consultas do SELECT
+    PreparedStatement pst; // Prepara as querys de manipulacao
 
     static final String user = "root";
     static final String password = "root";
@@ -23,7 +23,8 @@ public abstract class Database {
         try {
             connection = DriverManager.getConnection(url, user, password);
             System.out.println("Conexao feita com sucesso: " + connection);
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             System.out.println("Erro de conexao: " + e.getMessage());
         }
     }
@@ -34,16 +35,16 @@ public abstract class Database {
         String sql = "INSERT INTO dog(coleira, cor) VALUES (?,?)";
         try {
             pst = connection.prepareStatement(sql);
-            pst.setInt(1, dog.getColeira());// concatena nome no primeiro ? do comando
+            pst.setInt(1, dog.getColeira());// Concatena nome no primeiro ? do comando
             pst.setString(2, dog.getCor());
-            //pst.setString(3, dog.getNome());
-            //pst.setString(4, dog.gettCpf());
             pst.execute();
             check = true;
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             System.out.println("Erro de conexão: " + e.getMessage());
             check = false;
-        } finally {
+        }
+        finally {
             try {
                 connection.close();
                 pst.close();
@@ -55,22 +56,24 @@ public abstract class Database {
     }
 
 
-    //--------------------INSERINDO NOVO REGISTRO DE CAT--------------------
+    //--------------------INSERINDO NOVO CAT--------------------
     public boolean insertCat(Cat cat) {
         connect();
         String sql = "INSERT INTO cat(coleira, pelagem) VALUES (?,?)";
         try {
             pst = connection.prepareStatement(sql);
-            pst.setInt(1, cat.getColeira());// concatena nome no primeiro ? do comando
+            pst.setInt(1, cat.getColeira());// Concatena nome no primeiro ? do comando
             pst.setString(2, cat.getPelagem());
             //pst.setString(3, cat.getNome());
             //pst.setString(4, cat.gettCpf());
             pst.execute();
             check = true;
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             System.out.println("Erro de conexão: " + e.getMessage());
             check = false;
-        } finally {
+        }
+        finally {
             try {
                 connection.close();
                 pst.close();
@@ -82,26 +85,29 @@ public abstract class Database {
     }
 
 
-    //--------------------INSERINDO NOVO REGISTRO DE PET--------------------
+    //--------------------INSERINDO NOVO PET--------------------
     public boolean insertPet(Pet pet) {
         connect();
         String sql = "INSERT INTO pet(coleira, especie, nome, tCpf) VALUES (?,?,?,?)";
         try {
             pst = connection.prepareStatement(sql);
-            pst.setInt(1, pet.getColeira());// concatena nome no primeiro ? do comando
+            pst.setInt(1, pet.getColeira());// Concatena nome no primeiro ? do comando
             pst.setString(2, pet.getEspecie());
             pst.setString(3, pet.getNome());
             pst.setString(4, pet.gettCpf());
             pst.execute();
             check = true;
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             System.out.println("Erro de conexão: " + e.getMessage());
             check = false;
-        } finally {
+        }
+        finally {
             try {
                 connection.close();
                 pst.close();
-            } catch (SQLException e) {
+            }
+            catch (SQLException e) {
                 System.out.println("Erro ao fechar conexão: " + e.getMessage());
             }
         }
@@ -119,14 +125,17 @@ public abstract class Database {
             pst.setInt(3, t.getIdade());
             pst.execute();
             check = true;
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             System.out.println("Erro de conexão: " + e.getMessage());
             check = false;
-        } finally {
+        }
+        finally {
             try {
                 connection.close();
                 pst.close();
-            } catch (SQLException e) {
+            }
+            catch (SQLException e) {
                 System.out.println("Erro ao fechar conexão: " + e.getMessage());
             }
         }
@@ -158,14 +167,17 @@ public abstract class Database {
                 System.out.println("");
                 Pets.add(petTemp);
             }
-        }catch(SQLException e){
+        }
+        catch(SQLException e){
             System.out.println("Erro de conexao " + e.getMessage());
-        }finally {
+        }
+        finally {
             try {
                 connection.close();
                 pst.close();
                 result.close();
-            } catch (SQLException e) {
+            }
+            catch (SQLException e) {
                 System.out.println("Erro de conexao " + e.getMessage());
             }
         }
@@ -178,11 +190,11 @@ public abstract class Database {
         ArrayList<Dog> Dogs = new ArrayList<>();
         String sql = "SELECT * FROM dog";
 
-        try{
+        try {
             statement = connection.createStatement();
             result = statement.executeQuery(sql);
 
-            while(result.next()){
+            while (result.next()) {
                 Dog dogTemp = new Dog();
 
                 dogTemp.setColeira(result.getInt("coleira"));
@@ -193,14 +205,17 @@ public abstract class Database {
                 System.out.println();
                 Dogs.add(dogTemp);
             }
-        }catch(SQLException e){
+        }
+        catch(SQLException e){
             System.out.println("Erro de conexao " + e.getMessage());
-        }finally {
+        }
+        finally {
             try {
                 connection.close();
                 statement.close();
                 result.close();
-            } catch (SQLException e) {
+            }
+            catch (SQLException e) {
                 System.out.println("Erro de conexao " + e.getMessage());
             }
         }
@@ -217,7 +232,7 @@ public abstract class Database {
             statement = connection.createStatement();
             result = statement.executeQuery(sql);
 
-            while(result.next()){
+            while(result.next()) {
                 Cat catTemp = new Cat();
 
                 catTemp.setColeira(result.getInt("coleira"));
@@ -228,14 +243,17 @@ public abstract class Database {
                 System.out.println();
                 Cats.add(catTemp);
             }
-        }catch(SQLException e){
+        }
+        catch(SQLException e) {
             System.out.println("Erro de conexao " + e.getMessage());
-        }finally {
+        }
+        finally {
             try {
                 connection.close();
                 statement.close();
                 result.close();
-            } catch (SQLException e) {
+            }
+            catch (SQLException e) {
                 System.out.println("Erro de conexao " + e.getMessage());
             }
         }
@@ -260,14 +278,17 @@ public abstract class Database {
                 System.out.println();
                 Tutors.add(tutorTemp);
             }
-        }catch(SQLException e){
+        }
+        catch(SQLException e) {
             System.out.println("Erro de conexao " + e.getMessage());
-        }finally {
+        }
+        finally {
             try {
                 connection.close();
                 statement.close();
                 result.close();
-            } catch (SQLException e) {
+            }
+            catch (SQLException e) {
                 System.out.println("Erro de conexao " + e.getMessage());
             }
         }
@@ -285,14 +306,17 @@ public abstract class Database {
             pst.setString(2, cpf);
             pst.executeUpdate();
             check = true;
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             System.out.println("Erro de conexao " + e.getMessage());
             check = false;
-        } finally {
+        }
+        finally {
             try {
                 connection.close();
                 pst.close();
-            } catch (SQLException e) {
+            }
+            catch (SQLException e) {
                 System.out.println("Erro de conexao " + e.getMessage());
             }
         }
@@ -309,14 +333,17 @@ public abstract class Database {
             pst.setString(1, cpf);
             pst.execute();
             check = true;
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             System.out.println("Erro de conexao " + e.getMessage());
             check = false;
-        } finally {
+        }
+        finally {
             try {
                 connection.close();
                 pst.close();
-            } catch (SQLException e) {
+            }
+            catch (SQLException e) {
                 System.out.println("Erro de conexao " + e.getMessage());
             }
         }
@@ -339,14 +366,17 @@ public abstract class Database {
 
             check = true;
 
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             System.out.println("Erro de conexao " + e.getMessage());
             check = false;
-        } finally {
+        }
+        finally {
             try {
                 connection.close();
                 statement.close();
-            } catch (SQLException e) {
+            }
+            catch (SQLException e) {
                 System.out.println("Erro de conexao " + e.getMessage());
             }
         }
